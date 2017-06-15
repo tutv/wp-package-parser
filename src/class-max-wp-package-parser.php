@@ -92,7 +92,7 @@ class Max_WP_Package_Parser {
 	 *
 	 * @return array|false Either an associative array or FALSE if the input file is not a valid ZIP archive or doesn't contain a WP plugin or theme.
 	 */
-	public static function parsePackage( $packageFilename, $applyMarkdown = false ) {
+	private static function parsePackage( $packageFilename, $applyMarkdown = false ) {
 		if ( ! file_exists( $packageFilename ) || ! is_readable( $packageFilename ) ) {
 			return false;
 		}
@@ -186,7 +186,7 @@ class Max_WP_Package_Parser {
 	 *
 	 * @return array|null Associative array, or NULL if the input isn't a valid readme.txt file.
 	 */
-	public static function parseReadme( $readmeTxtContents, $applyMarkdown = false ) {
+	private static function parseReadme( $readmeTxtContents, $applyMarkdown = false ) {
 		$readmeTxtContents = trim( $readmeTxtContents, " \t\n\r" );
 		$readme            = array(
 			'name'              => '',
@@ -324,7 +324,7 @@ class Max_WP_Package_Parser {
 	 *
 	 * @return array|null See above for description.
 	 */
-	public static function getPluginHeaders( $fileContents ) {
+	private static function getPluginHeaders( $fileContents ) {
 		//[Internal name => Name used in the plugin file]
 		$pluginHeaderNames = array(
 			'Name'        => 'Plugin Name',
@@ -384,7 +384,7 @@ class Max_WP_Package_Parser {
 	 *
 	 * @return array|null See above for description.
 	 */
-	public static function getThemeHeaders( $fileContents ) {
+	private static function getThemeHeaders( $fileContents ) {
 		$themeHeaderNames = array(
 			'Name'        => 'Theme Name',
 			'ThemeURI'    => 'Theme URI',
@@ -423,7 +423,7 @@ class Max_WP_Package_Parser {
 	 *
 	 * @return array
 	 */
-	public static function getFileHeaders( $fileContents, $headerMap ) {
+	private static function getFileHeaders( $fileContents, $headerMap ) {
 		$headers = array();
 
 		//Support systems that use CR as a line ending.
