@@ -1,6 +1,9 @@
 <?php
 
 include_once 'libs/Parsedown.php';
+include_once 'class-max-wp-package.php';
+include_once 'class-max-wp-plugin.php';
+include_once 'class-max-wp-theme.php';
 
 /**
  * Class Max_WP_Package_Parser.
@@ -24,7 +27,7 @@ class Max_WP_Package_Parser {
 			return false;
 		}
 
-		$packageInfo = Max_WP_Package_Parser::parsePackage( $path, true );
+		$packageInfo = self::parsePackage( $path, true );
 
 		$meta = array();
 
@@ -92,7 +95,7 @@ class Max_WP_Package_Parser {
 	 *
 	 * @return array|false Either an associative array or FALSE if the input file is not a valid ZIP archive or doesn't contain a WP plugin or theme.
 	 */
-	private static function parsePackage( $packageFilename, $applyMarkdown = false ) {
+	public static function parsePackage( $packageFilename, $applyMarkdown = false ) {
 		if ( ! file_exists( $packageFilename ) || ! is_readable( $packageFilename ) ) {
 			return false;
 		}
@@ -325,7 +328,6 @@ class Max_WP_Package_Parser {
 	 * @return array|null See above for description.
 	 */
 	private static function getPluginHeaders( $fileContents ) {
-		//[Internal name => Name used in the plugin file]
 		$pluginHeaderNames = array(
 			'Name'        => 'Plugin Name',
 			'PluginURI'   => 'Plugin URI',
@@ -336,8 +338,6 @@ class Max_WP_Package_Parser {
 			'TextDomain'  => 'Text Domain',
 			'DomainPath'  => 'Domain Path',
 			'Network'     => 'Network',
-			//Site Wide Only is deprecated in favor of Network.
-			'_sitewide'   => 'Site Wide Only',
 		);
 
 		$headers = self::getFileHeaders( $fileContents, $pluginHeaderNames );
