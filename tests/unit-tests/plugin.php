@@ -3,11 +3,11 @@
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class Max_Tests_Theme_Package
+ * Class Max_Tests_Plugin_Package
  *
  * @since 1.0.0
  */
-class Max_Tests_Theme_Package extends TestCase {
+class Max_Tests_Plugin_Package extends TestCase {
 	/**
 	 * Package file.
 	 *
@@ -18,7 +18,7 @@ class Max_Tests_Theme_Package extends TestCase {
 	private $package_file;
 
 	/**
-	 * Max_Tests_Theme_Package constructor.
+	 * Max_Tests_Plugin_Package constructor.
 	 *
 	 * @since 1.0.0
 	 *
@@ -27,7 +27,7 @@ class Max_Tests_Theme_Package extends TestCase {
 	 * @param string $dataName
 	 */
 	public function __construct( $name = null, array $data = [], $dataName = '' ) {
-		$this->package_file = MAX_TESTS_DIR . '/packages/twentyseventeen.1.3.zip';
+		$this->package_file = MAX_TESTS_DIR . '/packages/hello-dolly.1.6.zip';
 
 		parent::__construct( $name, $data, $dataName );
 	}
@@ -41,6 +41,6 @@ class Max_Tests_Theme_Package extends TestCase {
 		$package = new Max_WP_Package( $this->package_file );
 		$package->parse();
 
-		$this->assertEquals( 'theme', $package->get_type() );
+		$this->assertEquals( 'plugin', $package->get_type() );
 	}
 }
