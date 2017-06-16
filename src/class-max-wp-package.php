@@ -79,9 +79,6 @@ class Max_WP_Package {
 	 */
 	public function get_metadata() {
 		$metadata = $this->metadata;
-		if ( $slug = $this->get_slug() ) {
-			$metadata['slug'] = $this->get_slug();
-		}
 
 		return $metadata;
 	}
@@ -158,7 +155,8 @@ class Max_WP_Package {
 		}
 
 		//Parse ok
-		$this->slug = $slug;
+		$this->slug             = $slug;
+		$this->metadata['slug'] = $slug;
 
 		return true;
 	}
