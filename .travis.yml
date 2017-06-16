@@ -18,6 +18,7 @@ matrix:
 sudo: false
 
 before_script:
+  - composer require phpunit/phpunit
   - composer install
 
 script:
