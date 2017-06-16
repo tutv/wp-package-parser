@@ -40,7 +40,7 @@ class Max_WP_Package {
 	 *
 	 * @var string
 	 */
-	private $type = '';
+	private $type = null;
 
 	/**
 	 * Max_WP_Package constructor.
@@ -50,7 +50,6 @@ class Max_WP_Package {
 	 * @param $package_file
 	 */
 	public function __construct( $package_file ) {
-		$this->type         = 'plugin';
 		$this->package_file = $package_file;
 	}
 
@@ -60,7 +59,7 @@ class Max_WP_Package {
 	 * @since 1.0.0
 	 *
 	 *
-	 * @return array|false
+	 * @return bool
 	 */
 	public function parse() {
 		if ( ! $this->validate_file() ) {
@@ -80,6 +79,7 @@ class Max_WP_Package {
 
 			switch ( $file_name ) {
 				case 'readme.txt':
+					$this->type = 'plugin';
 					break;
 
 				case 'style.css':
@@ -88,6 +88,10 @@ class Max_WP_Package {
 
 				default;
 			}
+		}
+
+		if ( empty( $this->type ) ) {
+			return false;
 		}
 
 		return true;

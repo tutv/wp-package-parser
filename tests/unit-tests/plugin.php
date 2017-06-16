@@ -9,27 +9,29 @@ use PHPUnit\Framework\TestCase;
  */
 class Max_Tests_Plugin_Package extends TestCase {
 	/**
-	 * Package file.
+	 * Test package not found.
 	 *
 	 * @since 1.0.0
-	 *
-	 * @var string
 	 */
-	private $package_file;
+	public function testPackageNotFound() {
+		$package = new Max_WP_Package( '/path/wrong/abc.zip' );
+		$result  = $package->parse();
+
+		$this->assertEquals( false, $result );
+		$this->assertEquals( null, $package->get_type() );
+	}
 
 	/**
-	 * Max_Tests_Plugin_Package constructor.
+	 * Test package wrong.
 	 *
 	 * @since 1.0.0
-	 *
-	 * @param null $name
-	 * @param array $data
-	 * @param string $dataName
 	 */
-	public function __construct( $name = null, array $data = [], $dataName = '' ) {
-		$this->package_file = MAX_TESTS_DIR . '/packages/hello-dolly.1.6.zip';
+	public function testPackageWrong() {
+		$package = new Max_WP_Package( MAX_TESTS_DIR . '/packages/hello-dolly.1.6.gzip' );
+		$result  = $package->parse();
 
-		parent::__construct( $name, $data, $dataName );
+		$this->assertEquals( false, $result );
+		$this->assertEquals( null, $package->get_type() );
 	}
 
 	/**
@@ -37,10 +39,11 @@ class Max_Tests_Plugin_Package extends TestCase {
 	 *
 	 * @since 1.0.0
 	 */
-	public function testGetTypePackage() {
-		$package = new Max_WP_Package( $this->package_file );
-		$package->parse();
+	public function testParse() {
+		$package = new Max_WP_Package( MAX_TESTS_DIR . '/packages/hello-dolly.1.6.zip' );
+		$result  = $package->parse();
 
+		$this->assertEquals( true, $result );
 		$this->assertEquals( 'plugin', $package->get_type() );
 	}
 }
