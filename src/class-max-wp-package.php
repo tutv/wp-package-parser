@@ -115,15 +115,20 @@ class Max_WP_Package {
 				$headers = Max_WP_Plugin_Parser::parsePluginFile( $content );
 
 				if ( $headers ) {
-					$this->type     = 'plugin';
-					$this->metadata = $headers;
+					//Add plugin file
+					$plugin_file       = $slug . '/' . $file_name;
+					$headers['plugin'] = $plugin_file;
+
+					$this->type        = 'plugin';
+					$this->metadata    = $headers;
 				}
 
 				continue;
 			}
 
 			if ( $file_name === 'readme.txt' ) {
-				$data           = Max_WP_Plugin_Parser::parser_readme( $content );
+				$data = Max_WP_Plugin_Parser::parser_readme( $content );
+				unset( $data['name'] );
 				$this->metadata = array_merge( $this->metadata, $data );
 
 				continue;

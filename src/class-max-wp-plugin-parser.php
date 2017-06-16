@@ -14,15 +14,15 @@ class Max_WP_Plugin_Parser extends Max_WP_Package_Parser {
 	 * @var array
 	 */
 	protected static $headerMap = array(
-		'Name'        => 'Plugin Name',
-		'PluginURI'   => 'Plugin URI',
-		'Version'     => 'Version',
-		'Description' => 'Description',
-		'Author'      => 'Author',
-		'AuthorURI'   => 'Author URI',
-		'TextDomain'  => 'Text Domain',
-		'DomainPath'  => 'Domain Path',
-		'Network'     => 'Network',
+		'name'           => 'Plugin Name',
+		'plugin_uri'     => 'Plugin URI',
+		'version'        => 'Version',
+		'description'    => 'Description',
+		'author'         => 'Author',
+		'author_profile' => 'Author URI',
+		'text_domain'    => 'Text Domain',
+		'domain_path'    => 'Domain Path',
+		'network'        => 'Network',
 	);
 
 	/**
@@ -173,10 +173,10 @@ class Max_WP_Plugin_Parser extends Max_WP_Package_Parser {
 	public static function parsePluginFile( $fileContents ) {
 		$headers = self::parseHeaders( $fileContents, self::$headerMap );
 
-		$headers['Network'] = ( strtolower( $headers['Network'] ) === 'true' );
+		$headers['network'] = ( strtolower( $headers['network'] ) === 'true' );
 
 		//If it doesn't have a name, it's probably not a plugin.
-		if ( empty( $headers['Name'] ) ) {
+		if ( empty( $headers['name'] ) ) {
 			return null;
 		} else {
 			return $headers;
