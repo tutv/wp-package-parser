@@ -1,0 +1,34 @@
+{
+  "name": "wp-package-parser",
+  "version": "1.0.0",
+  "description": "A PHP library for parsing WordPress plugin and theme metadata.",
+  "main": "gulpfile.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-phpunit": "^0.23.0",
+    "gulp-watch": "^4.3.11"
+  },
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tutv95/wp-package-parser.git"
+  },
+  "keywords": [
+    "parsing",
+    "wordpress",
+    "plugin",
+    "theme"
+  ],
+  "author": "tutv95",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tutv95/wp-package-parser/issues"
+  },
+  "homepage": "https://github.com/tutv95/wp-package-parser#readme"
+}
