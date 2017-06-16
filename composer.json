@@ -1,15 +1,19 @@
 {
-  "name": "max/wp-package-parser",
+  "name": "tutv95/wp-package-parser",
   "authors": [
     {
       "name": "Max",
       "email": "tutv95@gmail.com"
     }
   ],
+  "license": "MIT",
   "require": {
     "php": ">=5.4"
   },
   "require-dev": {
     "phpunit/phpunit": "^6.2"
+  },
+  "autoload": {
+    "files": ["wp-package-parser.php"]
   }
 }

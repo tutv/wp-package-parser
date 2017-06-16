@@ -60,5 +60,6 @@ class Max_Tests_Plugin_Package extends TestCase {
 		$this->assertEquals( '4.6', $metadata['requires'] );
 		$this->assertEquals( '4.7', $metadata['tested'] );
 		$this->assertEquals( '1.6', $metadata['version'] );
+		$this->assertEquals( 'hello-dolly', $metadata['slug'] );
 	}
 }
