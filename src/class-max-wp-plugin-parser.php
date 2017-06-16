@@ -7,13 +7,13 @@
  */
 class Max_WP_Plugin_Parser extends Max_WP_Package_Parser {
 	/**
-	 * Headers map.
+	 * Header map.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
-	protected static $headersMap = array(
+	protected static $headerMap = array(
 		'Name'        => 'Plugin Name',
 		'PluginURI'   => 'Plugin URI',
 		'Version'     => 'Version',
@@ -171,7 +171,7 @@ class Max_WP_Plugin_Parser extends Max_WP_Package_Parser {
 	 * @return array|null See above for description.
 	 */
 	public static function parsePluginFile( $fileContents ) {
-		$headers = self::parseHeaders( $fileContents, self::$headersMap );
+		$headers = self::parseHeaders( $fileContents, self::$headerMap );
 
 		$headers['Network'] = ( strtolower( $headers['Network'] ) === 'true' );
 

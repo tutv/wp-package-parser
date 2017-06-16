@@ -39,8 +39,9 @@ class Max_Tests_Theme_Package extends TestCase {
 	 */
 	public function testGetTypePackage() {
 		$package = new Max_WP_Package( $this->package_file );
-		$package->parse();
+		$result  = $package->parse();
 
 		$this->assertEquals( 'theme', $package->get_type() );
+		$this->assertEquals( true, $result );
 	}
 }

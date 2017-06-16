@@ -7,11 +7,13 @@
  */
 class Max_WP_Theme_Parser extends Max_WP_Package_Parser {
 	/**
-	 * Headers for style.css files.
+	 * Header map.
+	 *
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
-	protected static $headersMap = array(
+	protected static $headerMap = array(
 		'Name'        => 'Theme Name',
 		'ThemeURI'    => 'Theme URI',
 		'Description' => 'Description',
@@ -33,7 +35,7 @@ class Max_WP_Theme_Parser extends Max_WP_Package_Parser {
 	 * @return null
 	 */
 	public static function parse_style( $fileContents ) {
-		$headers = self::parseHeaders( $fileContents, self::$headersMap );
+		$headers = self::parseHeaders( $fileContents, self::$headerMap );
 
 		$headers['Tags'] = array_filter( array_map( 'trim', explode( ',', strip_tags( $headers['Tags'] ) ) ) );
 
