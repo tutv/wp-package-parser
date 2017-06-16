@@ -39,6 +39,15 @@ class Max_WP_Package {
 	private $type = null;
 
 	/**
+	 * Get slug.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var string
+	 */
+	private $slug = null;
+
+	/**
 	 * Max_WP_Package constructor.
 	 *
 	 * @since 1.0.0
@@ -47,6 +56,17 @@ class Max_WP_Package {
 	 */
 	public function __construct( $package_file ) {
 		$this->package_file = $package_file;
+	}
+
+	/**
+	 * Get slug.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return string|null
+	 */
+	public function get_slug() {
+		return $this->slug;
 	}
 
 	/**
@@ -73,6 +93,8 @@ class Max_WP_Package {
 			return false;
 		}
 
+		$slug = null;
+
 		$zip   = $this->open_package();
 		$files = $zip->numFiles;
 
@@ -84,6 +106,7 @@ class Max_WP_Package {
 				continue;
 			}
 
+			$slug      = $file['dirname'];
 			$file_name = $file['name'] . '.' . $file['extension'];
 			$content   = $zip->getFromIndex( $index );
 
@@ -101,7 +124,12 @@ class Max_WP_Package {
 					break;
 
 				case 'style.css':
-					$this->type = 'theme';
+					$headers = Max_WP_Theme_Parser::parse_style( $content );
+					if ( $headers ) {
+						$this->type     = 'theme';
+						$this->metadata = $headers;
+					}
+
 					break;
 
 				default;
@@ -112,6 +140,8 @@ class Max_WP_Package {
 			return false;
 		}
 
+		$this->slug = $slug;
+
 		return true;
 	}
 
@@ -120,7 +150,7 @@ class Max_WP_Package {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return string
+	 * @return string|null
 	 */
 	public function get_type() {
 		return $this->type;
@@ -147,6 +177,7 @@ class Max_WP_Package {
 		}
 
 		return array(
+			'dirname'   => $dirname,
 			'name'      => $data['filename'],
 			'extension' => $data['extension']
 		);

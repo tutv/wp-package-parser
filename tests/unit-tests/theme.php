@@ -19,6 +19,7 @@ class Max_Tests_Theme_Package extends TestCase {
 
 		$this->assertEquals( 'theme', $package->get_type() );
 		$this->assertEquals( true, $result );
+		$this->assertEquals( 'twentyseventeen', $package->get_slug() );
 	}
 
 	/**
@@ -33,6 +34,8 @@ class Max_Tests_Theme_Package extends TestCase {
 		$this->assertEquals( null, $package->get_type() );
 		$this->assertEquals( false, $result );
 		$this->assertEquals( array(), $package->get_metadata() );
+		$this->assertEquals( null, $package->get_slug() );
+
 	}
 
 	/**
@@ -47,5 +50,6 @@ class Max_Tests_Theme_Package extends TestCase {
 		$this->assertEquals( null, $package->get_type() );
 		$this->assertEquals( false, $result );
 		$this->assertEquals( array(), $package->get_metadata() );
+		$this->assertEquals( null, $package->get_slug() );
 	}
 }

@@ -19,6 +19,7 @@ class Max_Tests_Plugin_Package extends TestCase {
 
 		$this->assertEquals( false, $result );
 		$this->assertEquals( null, $package->get_type() );
+		$this->assertEquals( null, $package->get_slug() );
 	}
 
 	/**
@@ -32,6 +33,7 @@ class Max_Tests_Plugin_Package extends TestCase {
 
 		$this->assertEquals( false, $result );
 		$this->assertEquals( null, $package->get_type() );
+		$this->assertEquals( null, $package->get_slug() );
 	}
 
 	/**
@@ -45,5 +47,6 @@ class Max_Tests_Plugin_Package extends TestCase {
 
 		$this->assertEquals( true, $result );
 		$this->assertEquals( 'plugin', $package->get_type() );
+		$this->assertEquals( 'hello-dolly', $package->get_slug() );
 	}
 }
