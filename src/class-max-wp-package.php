@@ -1,20 +1,16 @@
 <?php
 
+include_once 'libs/Parsedown.php';
+include_once 'class-max-wp-package-parser.php';
+include_once 'class-max-wp-plugin-parser.php';
+include_once 'class-max-wp-theme-parser.php';
+
 /**
  * Class Max_WP_Package
  *
  * @since 1.0.0
  */
 class Max_WP_Package {
-	/**
-	 * Headers file.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @var array
-	 */
-	protected static $file_headers = array();
-
 	/**
 	 * Metadata.
 	 *
@@ -54,6 +50,17 @@ class Max_WP_Package {
 	}
 
 	/**
+	 * Get metadata.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array
+	 */
+	public function get_metadata() {
+		return $this->metadata;
+	}
+
+	/**
 	 * Parse package.
 	 *
 	 * @since 1.0.0
@@ -69,17 +76,28 @@ class Max_WP_Package {
 		$zip   = $this->open_package();
 		$files = $zip->numFiles;
 
-		for ( $i = 0; $i < $files; $i ++ ) {
-			$info = $zip->statIndex( $i );
+		for ( $index = 0; $index < $files; $index ++ ) {
+			$info = $zip->statIndex( $index );
 
-			$file_name = $this->explore_file( $info['name'] );
-			if ( ! $file_name ) {
+			$file = $this->explore_file( $info['name'] );
+			if ( ! $file ) {
 				continue;
+			}
+
+			$file_name = $file['name'] . '.' . $file['extension'];
+			$content   = $zip->getFromIndex( $index );
+
+			if ( $file['extension'] === 'php' ) {
+				$headers = Max_WP_Plugin_Parser::parsePluginFile( $content );
+
+				if ( $headers ) {
+					$this->type     = 'plugin';
+					$this->metadata = $headers;
+				}
 			}
 
 			switch ( $file_name ) {
 				case 'readme.txt':
-					$this->type = 'plugin';
 					break;
 
 				case 'style.css':
@@ -115,7 +133,7 @@ class Max_WP_Package {
 	 *
 	 * @param $file_name
 	 *
-	 * @return bool|string
+	 * @return bool|array
 	 */
 	private function explore_file( $file_name ) {
 		$data      = pathinfo( $file_name );
@@ -128,7 +146,10 @@ class Max_WP_Package {
 			return false;
 		}
 
-		return $data['filename'] . '.' . $data['extension'];
+		return array(
+			'name'      => $data['filename'],
+			'extension' => $data['extension']
+		);
 	}
 
 	/**
