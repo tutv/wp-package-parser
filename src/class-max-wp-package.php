@@ -56,6 +56,7 @@ class Max_WP_Package {
 	 */
 	public function __construct( $package_file ) {
 		$this->package_file = $package_file;
+		$this->parse();
 	}
 
 	/**
@@ -88,7 +89,7 @@ class Max_WP_Package {
 	 *
 	 * @return bool
 	 */
-	public function parse() {
+	private function parse() {
 		if ( ! $this->validate_file() ) {
 			return false;
 		}
