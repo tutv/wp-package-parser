@@ -13,7 +13,7 @@ class Max_WP_Plugin_Parser extends Max_WP_Package_Parser {
 	 *
 	 * @var array
 	 */
-	protected static $headerMap = array(
+	protected $headerMap = array(
 		'name'           => 'Plugin Name',
 		'plugin_uri'     => 'Plugin URI',
 		'version'        => 'Version',
@@ -34,7 +34,7 @@ class Max_WP_Plugin_Parser extends Max_WP_Package_Parser {
 	 *
 	 * @return array
 	 */
-	public static function parser_readme( $content ) {
+	public function parser_readme( $content ) {
 		$readmeTxtContents = trim( $content, " \t\n\r" );
 		$readme            = array(
 			'name'              => '',
@@ -119,7 +119,7 @@ class Max_WP_Plugin_Parser extends Max_WP_Package_Parser {
 		}
 
 		//Apply Markdown to sections
-		$sections = array_map( __CLASS__ . '::applyMarkdown', $sections );
+		$sections = array_map( array( $this, 'applyMarkdown' ), $sections );
 
 		//This is only necessary if you intend to later json_encode() the sections.
 		//json_encode() may encode certain strings as NULL if they're not in UTF-8.
@@ -128,23 +128,6 @@ class Max_WP_Plugin_Parser extends Max_WP_Package_Parser {
 		$readme['sections'] = $sections;
 
 		return $readme;
-	}
-
-	/**
-	 * Transform Markdown markup to HTML.
-	 *
-	 * Tries (in vain) to emulate the transformation that WordPress.org applies to readme.txt files.
-	 *
-	 * @param string $text
-	 *
-	 * @return string
-	 */
-	private static function applyMarkdown( $text ) {
-		//The WP standard for readme files uses some custom markup, like "= H4 headers ="
-		$text     = preg_replace( '@^\s*=\s*(.+?)\s*=\s*$@m', "<h4>$1</h4>\n", $text );
-		$markdown = new Parsedown();
-
-		return $markdown->parse( $text );
 	}
 
 	/**
@@ -170,8 +153,8 @@ class Max_WP_Plugin_Parser extends Max_WP_Package_Parser {
 	 *
 	 * @return array|null See above for description.
 	 */
-	public static function parsePluginFile( $fileContents ) {
-		$headers = self::parseHeaders( $fileContents, self::$headerMap );
+	public function parse_plugin_file( $fileContents ) {
+		$headers = $this->parseHeaders( $fileContents );
 
 		$headers['network'] = ( strtolower( $headers['network'] ) === 'true' );
 

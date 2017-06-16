@@ -94,8 +94,10 @@ class Max_WP_Package {
 			return false;
 		}
 
-		$slug = null;
+		$plugin_parser = new Max_WP_Plugin_Parser();
+		$theme_parser  = new  Max_WP_Theme_Parser();
 
+		$slug  = null;
 		$zip   = $this->open_package();
 		$files = $zip->numFiles;
 
@@ -112,22 +114,22 @@ class Max_WP_Package {
 			$content   = $zip->getFromIndex( $index );
 
 			if ( $file['extension'] === 'php' ) {
-				$headers = Max_WP_Plugin_Parser::parsePluginFile( $content );
+				$headers = $plugin_parser->parse_plugin_file( $content );
 
 				if ( $headers ) {
 					//Add plugin file
 					$plugin_file       = $slug . '/' . $file_name;
 					$headers['plugin'] = $plugin_file;
 
-					$this->type        = 'plugin';
-					$this->metadata    = $headers;
+					$this->type     = 'plugin';
+					$this->metadata = $headers;
 				}
 
 				continue;
 			}
 
 			if ( $file_name === 'readme.txt' ) {
-				$data = Max_WP_Plugin_Parser::parser_readme( $content );
+				$data = $plugin_parser->parser_readme( $content );
 				unset( $data['name'] );
 				$this->metadata = array_merge( $this->metadata, $data );
 
@@ -135,7 +137,7 @@ class Max_WP_Package {
 			}
 
 			if ( $file_name === 'style.css' ) {
-				$headers = Max_WP_Theme_Parser::parse_style( $content );
+				$headers = $theme_parser->parse_style( $content );
 				if ( $headers ) {
 					$this->type     = 'theme';
 					$this->metadata = $headers;

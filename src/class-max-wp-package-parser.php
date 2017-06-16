@@ -6,7 +6,16 @@
  *
  * @since 1.0.0
  */
-class Max_WP_Package_Parser {
+abstract class Max_WP_Package_Parser {
+	/**
+	 * Header map.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var array
+	 */
+	protected $headerMap = array();
+
 	/**
 	 * Parse the file contents to retrieve its metadata.
 	 *
@@ -15,12 +24,12 @@ class Max_WP_Package_Parser {
 	 * must not have any newlines or only parts of it will be displayed.
 	 *
 	 * @param string $fileContents File contents. Can be safely truncated to 8kiB as that's all WP itself scans.
-	 * @param array $headerMap The list of headers to search for in the file.
 	 *
 	 * @return array
 	 */
-	protected static function parseHeaders( $fileContents, $headerMap ) {
-		$headers = array();
+	protected function parseHeaders( $fileContents ) {
+		$headers   = array();
+		$headerMap = $this->headerMap;
 
 		//Support systems that use CR as a line ending.
 		$fileContents = str_replace( "\r", "\n", $fileContents );
@@ -37,5 +46,25 @@ class Max_WP_Package_Parser {
 		}
 
 		return $headers;
+	}
+
+
+	/**
+	 * Transform Markdown markup to HTML.
+	 *
+	 * Tries (in vain) to emulate the transformation that WordPress.org applies to readme.txt files.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $text
+	 *
+	 * @return string
+	 */
+	protected function applyMarkdown( $text ) {
+		//The WP standard for readme files uses some custom markup, like "= H4 headers ="
+		$text     = preg_replace( '@^\s*=\s*(.+?)\s*=\s*$@m', "<h4>$1</h4>\n", $text );
+		$markdown = new Parsedown();
+
+		return $markdown->parse( $text );
 	}
 }
