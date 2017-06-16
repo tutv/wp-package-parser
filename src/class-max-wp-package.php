@@ -117,29 +117,33 @@ class Max_WP_Package {
 					$this->type     = 'plugin';
 					$this->metadata = $headers;
 				}
+
+				continue;
 			}
 
-			switch ( $file_name ) {
-				case 'readme.txt':
-					break;
+			if ( $file_name === 'readme.txt' ) {
+				$data           = Max_WP_Plugin_Parser::parser_readme( $content );
+				$this->metadata = array_merge( $this->metadata, $data );
 
-				case 'style.css':
-					$headers = Max_WP_Theme_Parser::parse_style( $content );
-					if ( $headers ) {
-						$this->type     = 'theme';
-						$this->metadata = $headers;
-					}
+				continue;
+			}
 
-					break;
-
-				default;
+			if ( $file_name === 'style.css' ) {
+				$headers = Max_WP_Theme_Parser::parse_style( $content );
+				if ( $headers ) {
+					$this->type     = 'theme';
+					$this->metadata = $headers;
+				}
 			}
 		}
 
 		if ( empty( $this->type ) ) {
+			$this->metadata = array();
+
 			return false;
 		}
 
+		//Parse ok
 		$this->slug = $slug;
 
 		return true;
