@@ -14,17 +14,17 @@ class Max_WP_Theme_Parser extends Max_WP_Package_Parser {
 	 * @var array
 	 */
 	protected $headerMap = array(
-		'Name'        => 'Theme Name',
-		'ThemeURI'    => 'Theme URI',
-		'Description' => 'Description',
-		'Author'      => 'Author',
-		'AuthorURI'   => 'Author URI',
-		'Version'     => 'Version',
-		'Template'    => 'Template',
-		'Status'      => 'Status',
-		'Tags'        => 'Tags',
-		'TextDomain'  => 'Text Domain',
-		'DomainPath'  => 'Domain Path',
+		'name'        => 'Theme Name',
+		'theme_uri'   => 'Theme URI',
+		'description' => 'Description',
+		'author'      => 'Author',
+		'author_uri'  => 'Author URI',
+		'version'     => 'Version',
+		'template'    => 'Template',
+		'status'      => 'Status',
+		'tags'        => 'Tags',
+		'text_domain' => 'Text Domain',
+		'domain_path' => 'Domain Path',
 	);
 
 	/**
@@ -37,10 +37,10 @@ class Max_WP_Theme_Parser extends Max_WP_Package_Parser {
 	public function parse_style( $fileContents ) {
 		$headers = $this->parseHeaders( $fileContents );
 
-		$headers['Tags'] = array_filter( array_map( 'trim', explode( ',', strip_tags( $headers['Tags'] ) ) ) );
+		$headers['tags'] = array_filter( array_map( 'trim', explode( ',', strip_tags( $headers['tags'] ) ) ) );
 
 		//If it doesn't have a name, it's probably not a valid theme.
-		if ( empty( $headers['Name'] ) ) {
+		if ( empty( $headers['name'] ) ) {
 			return null;
 		} else {
 			return $headers;

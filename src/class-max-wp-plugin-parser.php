@@ -107,6 +107,7 @@ class Max_WP_Plugin_Parser extends Max_WP_Package_Parser {
 				}
 				//Start reading a new section
 				$currentSection = $matches[1];
+				$currentSection = strtolower($currentSection);
 				$contentBuffer  = array();
 			} else {
 				//Buffer all section content
