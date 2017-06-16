@@ -16,12 +16,12 @@ matrix:
   allow_failures:
     - php: nightly
     - php: 5.2
+    - php: 5.3
 
 sudo: false
 
 before_script:
   - composer require phpunit/phpunit
-  - composer install
 
 script:
   - ./vendor/bin/phpunit

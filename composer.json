@@ -1,11 +1,13 @@
 {
-    "name": "max/wp-package-parser",
-    "authors": [
-        {
-            "name": "Max",
-            "email": "tutv95@gmail.com"
-        }
-    ],
-    "require": {},
-    "require-dev": {}
+  "name": "max/wp-package-parser",
+  "authors": [
+    {
+      "name": "Max",
+      "email": "tutv95@gmail.com"
+    }
+  ],
+  "require": {},
+  "require-dev": {
+    "phpunit/phpunit": "^6.2"
+  }
 }
