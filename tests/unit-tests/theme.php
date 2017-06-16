@@ -9,39 +9,43 @@ use PHPUnit\Framework\TestCase;
  */
 class Max_Tests_Theme_Package extends TestCase {
 	/**
-	 * Package file.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @var string
-	 */
-	private $package_file;
-
-	/**
-	 * Max_Tests_Theme_Package constructor.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param null $name
-	 * @param array $data
-	 * @param string $dataName
-	 */
-	public function __construct( $name = null, array $data = [], $dataName = '' ) {
-		$this->package_file = MAX_TESTS_DIR . '/packages/twentyseventeen.1.3.zip';
-
-		parent::__construct( $name, $data, $dataName );
-	}
-
-	/**
-	 * Test get type package.
+	 * Test parse package.
 	 *
 	 * @since 1.0.0
 	 */
-	public function testGetTypePackage() {
-		$package = new Max_WP_Package( $this->package_file );
+	public function testParsePackageSuccess() {
+		$package = new Max_WP_Package( MAX_TESTS_DIR . '/packages/twentyseventeen.1.3.zip' );
 		$result  = $package->parse();
 
 		$this->assertEquals( 'theme', $package->get_type() );
 		$this->assertEquals( true, $result );
+	}
+
+	/**
+	 * Test parse package wrong.
+	 *
+	 * @since 1.0.0
+	 */
+	public function testParsePackageWrong() {
+		$package = new Max_WP_Package( MAX_TESTS_DIR . '/packages/twentyseventeen.wrong.zip' );
+		$result  = $package->parse();
+
+		$this->assertEquals( null, $package->get_type() );
+		$this->assertEquals( false, $result );
+		$this->assertEquals( array(), $package->get_metadata() );
+	}
+
+	/**
+	 * Test path wrong.
+	 *
+	 * @since 1.0.0
+	 */
+	public function testPathWrong() {
+		$package = new Max_WP_Package( 'path/wrong/test.zip' );
+		$result  = $package->parse();
+
+		$this->assertEquals( null, $package->get_type() );
+		$this->assertEquals( false, $result );
+		$this->assertEquals( array(), $package->get_metadata() );
 	}
 }
