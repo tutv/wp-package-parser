@@ -45,4 +45,22 @@ class Max_Tests_Theme_Package extends TestCase {
 		$this->assertEquals( array(), $package->get_metadata() );
 		$this->assertEquals( null, $package->get_slug() );
 	}
+
+	/**
+	 * Test get metadata.
+	 *
+	 * @since 1.0.0
+	 */
+	public function testGetMetadata() {
+		$package = new Max_WP_Package( MAX_TESTS_DIR . '/packages/twentysixteen.1.3.zip' );
+
+		$this->assertEquals( 'theme', $package->get_type() );
+		$this->assertEquals( 'twentysixteen', $package->get_slug() );
+
+		$metadata = $package->get_metadata();
+
+		$this->assertEquals( '1.3', $metadata['version'] );
+		$this->assertEquals( 'Twenty Sixteen', $metadata['name'] );
+		$this->assertEquals( 'twentysixteen', $metadata['text_domain'] );
+	}
 }

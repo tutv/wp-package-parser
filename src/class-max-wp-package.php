@@ -131,6 +131,7 @@ class Max_WP_Package {
 			if ( $file_name === 'readme.txt' ) {
 				$data = $plugin_parser->parser_readme( $content );
 				unset( $data['name'] );
+				$data['readme'] = true;
 				$this->metadata = array_merge( $this->metadata, $data );
 
 				continue;
