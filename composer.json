@@ -12,5 +12,8 @@
   },
   "require-dev": {
     "phpunit/phpunit": "^6.2"
+  },
+  "autoload": {
+    "files": ["wp-package-parser.php"]
   }
 }
