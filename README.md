@@ -1,4 +1,4 @@
-WordPress Package Parser
+WP Package Parser [![Travis](https://img.shields.io/travis/tutv95/wp-package-parser.svg)](https://travis-ci.org/tutv95/wp-package-parser) [![GitHub issues](https://img.shields.io/github/issues/tutv95/wp-package-parser.svg)](https://github.com/tutv95/wp-package-parser/issues) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/tutv95/wp-package-parser/master/LICENSE) 
 ========================
 
 A PHP library for parsing WordPress plugin and theme metadata. Point it at a ZIP package and it will:
