@@ -18,6 +18,7 @@ class Max_Tests_Plugin_Package extends TestCase {
 
 		$this->assertEquals( null, $package->get_type() );
 		$this->assertEquals( null, $package->get_slug() );
+		$this->assertEquals( array(), $package->get_metadata() );
 	}
 
 	/**
@@ -30,6 +31,7 @@ class Max_Tests_Plugin_Package extends TestCase {
 
 		$this->assertEquals( null, $package->get_type() );
 		$this->assertEquals( null, $package->get_slug() );
+		$this->assertEquals( array(), $package->get_metadata() );
 	}
 
 	/**

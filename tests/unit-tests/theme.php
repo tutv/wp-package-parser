@@ -31,7 +31,6 @@ class Max_Tests_Theme_Package extends TestCase {
 		$this->assertEquals( null, $package->get_type() );
 		$this->assertEquals( array(), $package->get_metadata() );
 		$this->assertEquals( null, $package->get_slug() );
-
 	}
 
 	/**
