@@ -92,7 +92,7 @@ Jason Hendriks - Postman is a next-generation SMTP Mailer, software that assists
 
 Requirements
 ------------
-PHP 5.2. 
+PHP 5.4. 
 
 Credits
 -------
