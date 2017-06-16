@@ -62,5 +62,6 @@ class Max_Tests_Theme_Package extends TestCase {
 		$this->assertEquals( '1.3', $metadata['version'] );
 		$this->assertEquals( 'Twenty Sixteen', $metadata['name'] );
 		$this->assertEquals( 'twentysixteen', $metadata['text_domain'] );
+		$this->assertEquals( 'twentysixteen', $metadata['slug'] );
 	}
 }
