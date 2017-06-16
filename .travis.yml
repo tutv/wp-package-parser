@@ -22,6 +22,8 @@ sudo: false
 
 before_script:
   - composer require phpunit/phpunit
+  - npm install -g gulp-cli
+  - npm install
 
 script:
   - ./vendor/bin/phpunit
