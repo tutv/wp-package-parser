@@ -3,7 +3,7 @@
 /**
  * Title         : WP Package Parser
  * Description   : Parsing WordPress plugin and theme metadata.
- * Version       : 1.0.3
+ * Version       : 1.0.4
  * Author        : Max
  * Author URI    : https://github.com/tutv95
  * License       : MIT
