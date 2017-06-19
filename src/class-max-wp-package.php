@@ -121,7 +121,7 @@ class Max_WP_Package {
 					$headers['plugin'] = $plugin_file;
 
 					$this->type     = 'plugin';
-					$this->metadata = $headers;
+					$this->metadata = array_merge( $this->metadata, $headers );
 				}
 
 				continue;
@@ -131,7 +131,7 @@ class Max_WP_Package {
 				$data = $plugin_parser->parser_readme( $content );
 				unset( $data['name'] );
 				$data['readme'] = true;
-				$this->metadata = array_merge( $this->metadata, $data );
+				$this->metadata = array_merge( $data, $this->metadata );
 
 				continue;
 			}
