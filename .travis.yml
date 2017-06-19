@@ -22,6 +22,6 @@ before_script:
   - npm install
 
 script:
-  - npm test
+  - gulp test
 
 dist: trusty
