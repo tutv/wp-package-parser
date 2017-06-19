@@ -39,6 +39,15 @@ class Max_WP_Package {
 	private $type = null;
 
 	/**
+	 * Get slug.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var string
+	 */
+	private $slug = null;
+
+	/**
 	 * Max_WP_Package constructor.
 	 *
 	 * @since 1.0.0
@@ -58,13 +67,7 @@ class Max_WP_Package {
 	 * @return string|null
 	 */
 	public function get_slug() {
-		$metadata = $this->get_metadata();
-
-		if ( ! isset( $metadata['slug'] ) ) {
-			return null;
-		}
-
-		return $metadata['slug'];
+		return $this->slug;
 	}
 
 	/**
@@ -151,6 +154,8 @@ class Max_WP_Package {
 			return false;
 		}
 
+		//Parse ok
+		$this->slug             = $slug;
 		$this->metadata['slug'] = $slug;
 
 		return true;
