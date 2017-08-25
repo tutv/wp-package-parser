@@ -42,8 +42,8 @@ class Max_WP_Theme_Parser extends Max_WP_Package_Parser {
 		//If it doesn't have a name, it's probably not a valid theme.
 		if ( empty( $headers['name'] ) ) {
 			return null;
-		} else {
-			return $headers;
 		}
+
+		return $headers;
 	}
 }
